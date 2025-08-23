@@ -1,0 +1,4 @@
+# Placeholder patch for vLLM integration:
+# - Add a flag like --fa3-fused-kv-quant
+# - Route the attention call to your custom op that accepts page headers/scales.
+# This is left as a note because exact filenames vary by vLLM version.

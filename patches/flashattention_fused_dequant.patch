@@ -1,0 +1,12 @@
+# Placeholder patch (structure only). You will adapt to the exact FA-3 files later.
+# Steps:
+# 1) Find the FA-3 "producer" section where K/V pages are loaded global->SMEM.
+# 2) If dtype==FP16: keep current fast path.
+# 3) If dtype==FP8/INT8: cp.async quantized tiles + scales -> scratch, then call your
+#    dequant_tile_to_smem_* helpers to write FP16 directly into the FA-3 SMEM layout.
+#
+# Files typically touched:
+#   csrc/flash_attn/src/fmha_fa3_kernel.cu
+#   csrc/flash_attn/src/...
+#
+# This patch is a guide; it won't apply cleanly until you pick a commit.

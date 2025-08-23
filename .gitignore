@@ -1,0 +1,38 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+.env
+build/
+dist/
+
+# Logs & outputs
+logs/
+*.log
+
+# Notebooks
+.ipynb_checkpoints/
+
+# CUDA/C++ build bits
+*.o
+*.a
+*.so
+*.d
+
+# Data / artifacts
+*.pt
+*.bin
+*.npz
+*.npy
+
+# Editor
+.vscode/
+.idea/
+
+# Containers
+*.sif
+
+# Third-party repos we clone locally
+flash-attention/
+vllm/
