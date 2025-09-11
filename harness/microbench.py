@@ -2,6 +2,7 @@ import time, argparse, torch
 from kv_formats.quantize_pages_fp8_int8 import (
     quantize_int8_per_frag, dequant_int8_per_frag
 )
+from harness.fused_dequant_ext import dequant_tiles
 
 def attn(q,k,v):
     s = (q.shape[-1] ** -0.5)
@@ -24,6 +25,11 @@ def fused_sim(q, k_q, v_q, sk, sv, zk, zv, frag_M=16, frag_K=64):
     k = dequant_int8_per_frag(k_q, sk, zk, frag_M, frag_K)
     v = dequant_int8_per_frag(v_q, sv, zv, frag_M, frag_K)
     return attn(q, k, v)
+
+def fused_kernel_path():
+    kd = dequant_tiles(kq, sk, zk, args.fragM, args.fragK)
+    vd = dequant_tiles(vq, sv, zv, args.fragM, args.fragK)
+    return attn(q, kd, vd)
 
 if __name__ == "__main__":
     p = argparse.ArgumentParser()
@@ -57,3 +63,6 @@ if __name__ == "__main__":
     # "Fused" sim (still dequants, but structured to be easy to replace by kernel)
     tC = bench(lambda: fused_sim(q, kq, vq, sk, sv, zk, zv, args.fragM, args.fragK))
     print(f"C) Fused (sim): {tC*1e3:.2f} ms/iter")
+
+    tD = bench(fused_kernel_path)
+    print(f"D) Fused kernel (global-out test): {tD*1e3:.2f} ms/iter")
