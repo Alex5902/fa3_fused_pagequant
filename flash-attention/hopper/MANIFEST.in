@@ -1,0 +1,8 @@
+# Include CUDA/C++ sources and all headers
+recursive-include flash_attn_3 *.h *.hpp *.cuh *.cu *.cpp
+recursive-include csrc *.h *.hpp *.cuh *.cu *.cpp
+recursive-include third_party/nvidia/cutlass/include *.h *.hpp
+recursive-include third_party/nvidia/cute/include *.h *.hpp
+recursive-include third_party/nvidia/backend *.*
+# Keep README etc.
+include README.md LICENSE

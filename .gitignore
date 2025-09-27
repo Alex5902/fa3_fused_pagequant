@@ -1,38 +1,44 @@
 # Python
 __pycache__/
-*.py[cod]
+*.pyc
+*.pyo
+*.pyd
 *.egg-info/
 .venv/
 .env
+
+# Build artifacts / objects
 build/
 dist/
-
-# Logs & outputs
-logs/
-*.log
-
-# Notebooks
-.ipynb_checkpoints/
-
-# CUDA/C++ build bits
 *.o
-*.a
 *.so
-*.d
+*.a
 
-# Data / artifacts
-*.pt
-*.bin
-*.npz
-*.npy
+# Job outputs & logs
+*.log
+logs/
+fa3_build_*.e*
+fa3_build_*.o*
+fa3_correctness.e*
+fa3_correctness.o*
+fa3_build_minimal_and_test.e*
+fa3_build_minimal_and_test.o*
+fa3_build_final*.e*
+fa3_build_final*.o*
+fa3_build_final_direct*.e*
+fa3_build_final_direct*.o*
 
-# Editor
-.vscode/
-.idea/
+# Wheels / big binaries
+wheels/
+*.whl
+*.zip
 
-# Containers
-*.sif
+# CMake/Py build temps inside flash-attention too
+flash-attention/build/
+flash-attention/hopper/build/
+flash-attention/flash_attn.egg-info/
+flash-attention/build/temp.*
+flash-attention/.eggs/
 
-# Third-party repos we clone locally
-flash-attention/
-vllm/
+# Misc
+.DS_Store
